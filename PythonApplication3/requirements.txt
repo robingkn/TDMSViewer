@@ -1,0 +1,5 @@
+pip==25.0.1
+matplotlib==3.7.1
+opencv-python==4.11.0.86
+flask==2.3.2
+nptdms==1.8.0
