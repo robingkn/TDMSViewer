@@ -7,7 +7,7 @@ on:
     types: [published]
 
 permissions:
-  contents: write
+  contents: write  # required for softprops/action-gh-release
 
 jobs:
   build:
@@ -39,7 +39,7 @@ jobs:
         call venv\Scripts\activate.bat
         pip freeze
       shell: cmd
-      
+
     - name: Clean previous builds
       run: |
         Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
@@ -59,20 +59,22 @@ jobs:
       run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss'
       shell: pwsh
 
-    # Artifact upload for push (1-day retention)
+    - name: Zip installer
+      run: Compress-Archive -Path Output/TDMSViewerSetup.exe -DestinationPath Output/TDMSViewerInstaller.zip
+      shell: pwsh
+
     - name: Upload installer (push)
       if: github.event_name == 'push'
       uses: actions/upload-artifact@v4
       with:
         name: TDMSViewerInstaller
-        path: Output/TDMSViewerSetup.exe
+        path: Output/TDMSViewerInstaller.zip
         retention-days: 1
 
-    # Upload to GitHub Release (if release)
     - name: Upload to GitHub Release
       if: github.event_name == 'release'
       uses: softprops/action-gh-release@v2
       with:
         name: TDMSViewer Setup
         tag_name: ${{ github.ref_name }}
-        files: Output/TDMSViewerSetup.exe
+        files: Output/TDMSViewerInstaller.zip
