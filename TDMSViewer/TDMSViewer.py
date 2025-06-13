@@ -11,7 +11,7 @@ class TDMSViewer(tk.Tk):
         self.title("TDMS File Viewer")
         self.geometry("1000x700")
 
-        self.page_size = 100
+        self.page_size = 1000
         self.current_page = 0
         self.current_channel = None
 
