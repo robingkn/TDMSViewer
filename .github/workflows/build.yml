@@ -1,40 +1,41 @@
-name: Build Installer
+name: Build TDMSViewer Installer
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main]  # Change to your default branch
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repo
+      uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.11
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install pyinstaller nptdms matplotlib
+        pip install -r TDMSViewer/requirements.txt
+        pip install pyinstaller
 
-    - name: Build with PyInstaller
-      run: pyinstaller --noconfirm --onefile --windowed TDMSViewer\TDMSViewer.py
-
-    - name: Download Inno Setup
+    - name: Build .exe with PyInstaller
       run: |
-        Invoke-WebRequest https://jrsoftware.org/download.php/is.exe -OutFile is.exe
-        Start-Process is.exe -ArgumentList '/VERYSILENT' -Wait
+        pyinstaller --onefile TDMSViewer/TDMSViewer.py --name TDMSViewerApp
 
-    - name: Run Inno Setup
-      run: '"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss'
+    - name: Install Inno Setup
+      run: |
+        choco install innosetup -y
 
-    - name: Upload Installer Artifact
+    - name: Build installer using Inno Setup
+      run: |
+        "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
+
+    - name: Upload installer artifact
       uses: actions/upload-artifact@v3
       with:
         name: TDMSViewerInstaller
-        path: Output\TDMSViewerSetup.exe
+        path: Output/TDMSViewerSetup.exe  # Adjust if your script outputs differently
