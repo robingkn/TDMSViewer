@@ -46,3 +46,4 @@ jobs:
       with:
         name: TDMSViewerInstaller
         path: Output/TDMSViewerSetup.exe
+        retention-days: 1
