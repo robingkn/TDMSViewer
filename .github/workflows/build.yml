@@ -22,13 +22,11 @@ jobs:
       shell: cmd
 
     - name: Activate venv and install dependencies
-      run: |
-        pip freeze
-        call venv\Scripts\activate.bat
-        python -m pip install --upgrade pip
-        pip install -r TDMSViewer/requirements.txt
-        pip install pyinstaller
-        pip freeze
+      run: |        
+        call venv\Scripts\activate.bat && ^
+        venv\Scripts\python.exe -m pip install --upgrade pip && ^
+        venv\Scripts\python.exe -m pip install -r TDMSViewer/requirements.txt && ^
+        venv\Scripts\python.exe -m pip install pyinstaller        
       shell: cmd
 
     - name: Print installed packages
