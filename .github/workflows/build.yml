@@ -24,7 +24,7 @@ jobs:
 
     - name: Clean old builds
       run: |
-        Remove-Item -Recurse -Force build, dist
+        Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
 
     - name: Build .exe with PyInstaller
       run: |
