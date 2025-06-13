@@ -24,8 +24,7 @@ jobs:
 
     - name: Clean old builds
       run: |
-        rmdir /s /q build
-        rmdir /s /q dist
+        Remove-Item -Recurse -Force build, dist
 
     - name: Build .exe with PyInstaller
       run: |
