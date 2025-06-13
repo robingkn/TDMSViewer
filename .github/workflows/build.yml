@@ -1,6 +1,8 @@
 name: Build TDMSViewer Installer
 
 on:
+  push:
+    branches: [master]
   release:
     types: [published]
 
@@ -34,7 +36,7 @@ jobs:
         call venv\Scripts\activate.bat
         pip freeze
       shell: cmd
-
+      
     - name: Clean previous builds
       run: |
         Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
@@ -54,7 +56,9 @@ jobs:
       run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss'
       shell: pwsh
 
-    - name: Upload installer to GitHub Release
-      uses: softprops/action-gh-release@v1
+    - name: Upload installer artifact
+      uses: actions/upload-artifact@v4
       with:
-        files: Output/TDMSViewerSetup.exe
+        name: TDMSViewerInstaller
+        path: Output/TDMSViewerSetup.exe
+        retention-days: ${{ github.event_name == 'push' && 1 || 90 }}
