@@ -7,7 +7,7 @@ A desktop GUI tool built with Python and Tkinter to **browse, inspect, and visua
 - Open and read `.tdms` files using `nptdms`
 - Interactive tree structure for File → Group → Channel navigation
 - Property panel for file, group, and channel metadata
-- Channel data preview table (100 points per page, paginated)
+- Channel data preview table (1000 points per page, paginated)
 - Line plot of channel data with auto-refresh
 - Navigation controls:
   - Page forward (`>`), backward (`<`), and jump to a specific page
@@ -15,7 +15,4 @@ A desktop GUI tool built with Python and Tkinter to **browse, inspect, and visua
 
 ## 📦 Installation
 
-Make sure you have Python 3.7 or later installed.
-
-```bash
-pip install nptdms matplotlib
+Download the latest TDMSViewer installer from the Releases page and run the .exe file to install the application.
