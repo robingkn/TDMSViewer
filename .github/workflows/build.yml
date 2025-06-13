@@ -56,9 +56,20 @@ jobs:
       run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss'
       shell: pwsh
 
-    - name: Upload installer artifact
+    # Artifact upload for push (1-day retention)
+    - name: Upload installer (push)
+      if: github.event_name == 'push'
       uses: actions/upload-artifact@v4
       with:
         name: TDMSViewerInstaller
         path: Output/TDMSViewerSetup.exe
-        retention-days: ${{ github.event_name == 'push' && 1 || 90 }}
+        retention-days: 1
+
+    # Upload to GitHub Release (if release)
+    - name: Upload to GitHub Release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v2
+      with:
+        name: TDMSViewer Setup
+        tag_name: ${{ github.ref_name }}
+        files: Output/TDMSViewerSetup.exe
