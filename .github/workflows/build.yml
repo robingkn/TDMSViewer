@@ -1,8 +1,8 @@
 name: Build TDMSViewer Installer
 
 on:
-  push:
-    branches: [master]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -22,11 +22,11 @@ jobs:
       shell: cmd
 
     - name: Activate venv and install dependencies
-      run: |        
+      run: |
         call venv\Scripts\activate.bat && ^
         venv\Scripts\python.exe -m pip install --upgrade pip && ^
         venv\Scripts\python.exe -m pip install -r TDMSViewer/requirements.txt && ^
-        venv\Scripts\python.exe -m pip install pyinstaller        
+        venv\Scripts\python.exe -m pip install pyinstaller
       shell: cmd
 
     - name: Print installed packages
@@ -34,7 +34,7 @@ jobs:
         call venv\Scripts\activate.bat
         pip freeze
       shell: cmd
-      
+
     - name: Clean previous builds
       run: |
         Remove-Item -Recurse -Force build, dist -ErrorAction SilentlyContinue
@@ -54,9 +54,7 @@ jobs:
       run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss'
       shell: pwsh
 
-    - name: Upload installer artifact
-      uses: actions/upload-artifact@v4
+    - name: Upload installer to GitHub Release
+      uses: softprops/action-gh-release@v1
       with:
-        name: TDMSViewerInstaller
-        path: Output/TDMSViewerSetup.exe
-        retention-days: 1
+        files: Output/TDMSViewerSetup.exe
