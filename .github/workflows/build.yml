@@ -24,7 +24,7 @@ jobs:
 
     - name: Build .exe with PyInstaller
       run: |
-        pyinstaller --onefile TDMSViewer/TDMSViewer.py --name TDMSViewerApp
+        pyinstaller TDMSViewer.spec
 
     - name: Install Inno Setup
       run: |
