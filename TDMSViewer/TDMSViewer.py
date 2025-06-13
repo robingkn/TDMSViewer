@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pprint
 
+# TDMSViewer.py - A simple GUI for viewing TDMS files with pagination and plotting capabilities
 class TDMSViewer(tk.Tk):
     def __init__(self):
         super().__init__()
