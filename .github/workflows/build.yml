@@ -31,7 +31,7 @@ jobs:
 
     - name: Generate PyInstaller EXE
       run: |
-        pyinstaller --onefile TDMSViewer/TDMSViewer.py --name TDMSViewerApp
+        pyinstaller --onefile --windowed TDMSViewer/TDMSViewer.py --name TDMSViewerApp
 
     - name: Install Inno Setup
       run: choco install innosetup -y
