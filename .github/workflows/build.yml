@@ -17,13 +17,12 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Create and activate virtual environment
+    - name: Create virtual environment and install dependencies
       run: |
         python -m venv venv
-        venv\Scripts\activate
-        python -m pip install --upgrade pip
-        pip install -r TDMSViewer/requirements.txt
-        pip install pyinstaller
+        venv\Scripts\python -m pip install --upgrade pip
+        venv\Scripts\pip install -r TDMSViewer/requirements.txt
+        venv\Scripts\pip install pyinstaller
 
     - name: Clean previous builds
       run: |
@@ -33,8 +32,7 @@ jobs:
 
     - name: Generate PyInstaller EXE
       run: |
-        venv\Scripts\activate
-        pyinstaller --onefile --windowed TDMSViewer/TDMSViewer.py --name TDMSViewerApp
+        venv\Scripts\pyinstaller --onefile --windowed TDMSViewer/TDMSViewer.py --name TDMSViewerApp
 
     - name: Install Inno Setup
       run: choco install innosetup -y
