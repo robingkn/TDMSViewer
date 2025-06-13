@@ -38,5 +38,6 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=True,
+	distpath='dist',
     name='TDMSViewerApp'
 )

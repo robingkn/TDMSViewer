@@ -22,6 +22,11 @@ jobs:
         pip install -r TDMSViewer/requirements.txt
         pip install pyinstaller
 
+    - name: Clean old builds
+      run: |
+        rmdir /s /q build
+        rmdir /s /q dist
+
     - name: Build .exe with PyInstaller
       run: |
         pyinstaller TDMSViewer.spec
