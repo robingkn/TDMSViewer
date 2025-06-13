@@ -2,7 +2,7 @@ name: Build TDMSViewer Installer
 
 on:
   push:
-    branches: [main]  # Change to your default branch
+    branches: [master]  # Change to your default branch
 
 jobs:
   build:
