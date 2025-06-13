@@ -17,8 +17,10 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install dependencies
+    - name: Create and activate virtual environment
       run: |
+        python -m venv venv
+        venv\Scripts\activate
         python -m pip install --upgrade pip
         pip install -r TDMSViewer/requirements.txt
         pip install pyinstaller
@@ -31,6 +33,7 @@ jobs:
 
     - name: Generate PyInstaller EXE
       run: |
+        venv\Scripts\activate
         pyinstaller --onefile --windowed TDMSViewer/TDMSViewer.py --name TDMSViewerApp
 
     - name: Install Inno Setup
