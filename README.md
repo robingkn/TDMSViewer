@@ -1,4 +1,4 @@
-# TDMS Viewer with Pagination
+# TDMS Viewer
 
 A desktop GUI tool built with Python and Tkinter to **browse, inspect, and visualize** National Instruments' `.tdms` files. This viewer supports **large files** with **incremental loading** and **page-based navigation** of channel data.
 
