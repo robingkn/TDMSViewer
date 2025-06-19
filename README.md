@@ -16,3 +16,5 @@ A desktop GUI tool built with Python and Tkinter to **browse, inspect, and visua
 ## 📦 Installation
 
 Download the latest TDMSViewer installer from the Releases page and run the .exe file to install the application.
+
+![TDMSViewer](https://github.com/user-attachments/assets/779f95cf-c10d-4254-9f7a-caa3f93b99b4)
